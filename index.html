@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan | trafficLine</title>
+    <style>
+        .box {
+            background-color: #333;
+            width: 100px;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .item-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: darkgray;
+            border: 2px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="box">
+            <div id="redLamp" class="item-box"></div>
+            <div id="yellowLamp" class="item-box"></div>
+            <div id="greenLamp" class="item-box"></div>
+        </div>
+    </main>
+
+    <script>
+        const red = document.getElementById("redLamp");
+        const yellow = document.getElementById("yellowLamp");
+        const green = document.getElementById("greenLamp");
+        
+        function showYellow() {
+            return new Promise((res) => {
+                setTimeout(() => {
+                    red.style.backgroundColor = "darkgray";
+                    yellow.style.backgroundColor = "yellow";
+                    green.style.backgroundColor = "darkgray";
+                    res();
+                }, 3000);
+            });
+        }
+        
+        function showGreen() {
+            return new Promise((res) => {
+                setTimeout(() => {
+                    red.style.backgroundColor = "darkgray";
+                    yellow.style.backgroundColor = "darkgray";
+                    green.style.backgroundColor = "green";
+                    res();
+                }, 2000);
+            });
+        }
+        
+        function showRed() {
+            return new Promise((res) => {
+                setTimeout(() => {
+                    red.style.backgroundColor = "red";
+                    yellow.style.backgroundColor = "darkgray";
+                    green.style.backgroundColor = "darkgray";
+                    res();
+                }, 3000);
+            });
+        }
+        
+        async function onOffTraffic() {
+            try {
+                await showRed();
+                await showYellow();
+                await showGreen();
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        
+        onOffTraffic();
+        setInterval(onOffTraffic, 8000);
+    </script>
+</body>
+</html>
